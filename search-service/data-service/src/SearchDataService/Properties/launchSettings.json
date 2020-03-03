@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "SearchDataService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
