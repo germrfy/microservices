@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    app: people
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: people
+  template:
+    metadata:
+      labels:
+        app: people
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:latest
+          imagePullPolicy: Always
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "p4ssw0rd"
+            - name: POSTGRES_DB
+              value: "people"
+          ports:
+            - containerPort: 5432
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: postgres-svc
+  spec:
+    ports:
+      - port: 5432
+        targetPort: 5432
+        protocol: TCP
+        name: http
+    selector:
+      app: people
